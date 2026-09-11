@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>GUJARATI TRADER (JIGA BHAI) | Stock Market Education</title>
-    
-    <!-- NEW META PIXEL CODE (UPDATED) - Pixel ID: 1044303745149738 -->
+
+    <!-- ✅ NEW META PIXEL CODE (UPDATED) - Pixel ID: 1384221989949561 -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -15,15 +15,15 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1044303745149738');
+        fbq('init', '1384221989949561');
         fbq('track', 'PageView');
     </script>
     <noscript>
         <img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=1044303745149738&ev=PageView&noscript=1"/>
+        src="https://www.facebook.com/tr?id=1384221989949561&ev=PageView&noscript=1"/>
     </noscript>
     <!-- END META PIXEL CODE -->
-    
+
     <style>
         * {
             margin: 0;
@@ -236,6 +236,29 @@
             margin-top: 8px;
         }
 
+        /* Timer badge */
+        .timer-badge {
+            text-align: center;
+            background: #2a3a3e;
+            padding: 10px 12px;
+            border-radius: 40px;
+            margin: 14px 0 0;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #e6d5a0;
+            border: 1px solid #c9a84c50;
+            letter-spacing: 0.3px;
+        }
+
+        .timer-badge span {
+            color: #ff66b0;
+            font-size: 1.2rem;
+            font-weight: 800;
+            display: inline-block;
+            min-width: 36px;
+            transition: all 0.2s;
+        }
+
         @media (max-width: 480px) {
             .content {
                 padding: 20px 16px 30px;
@@ -256,6 +279,9 @@
             }
             .tagline {
                 font-size: 0.8rem;
+            }
+            .timer-badge {
+                font-size: 0.75rem;
             }
         }
 
@@ -313,6 +339,11 @@
             <a href="https://t.me/+tQv0DMiybwIyOGE1" target="_blank" rel="noopener noreferrer" class="join-btn" id="joinBtn1" data-position="top">
                 📲 JOIN TELEGRAM - SUBSCRIBE NOW 🚀
             </a>
+        </div>
+
+        <!-- ⏳ 20 SEC TIMER BADGE -->
+        <div class="timer-badge" id="timerBadge">
+            ⏳ Redirecting to Telegram in <span id="timerCount">20</span>s
         </div>
 
         <div class="tagline">
@@ -416,13 +447,55 @@
             
             // UPDATED Telegram channel link
             const TELEGRAM_LINK = "https://t.me/+tQv0DMiybwIyOGE1";
-            // UPDATED Facebook Pixel ID: 1044303745149738
-            const PIXEL_ID = "1044303745149738";
+            // ✅ NEW Facebook Pixel ID: 1384221989949561
+            const PIXEL_ID = "1384221989949561";
             // Brand Name
             const BRAND_NAME = "GUJARATI_TRADER_JIGA_BHAI";
             
             // Get device type
             const deviceType = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
+            
+            // ========== 20 SECOND REDIRECT TIMER ==========
+            let secondsLeft = 20;
+            const timerCountEl = document.getElementById('timerCount');
+            const timerBadge = document.getElementById('timerBadge');
+            let redirectDone = false;
+
+            function fireRedirectPixel() {
+                if (typeof fbq === 'function') {
+                    fbq('trackCustom', 'AutoRedirectToTelegram', {
+                        redirect_seconds: 20,
+                        destination: TELEGRAM_LINK,
+                        pixel_id: PIXEL_ID,
+                        brand: BRAND_NAME,
+                        education_context: 'true'
+                    });
+                    console.log('⏳ Auto-redirect pixel fired');
+                }
+            }
+
+            const timerInterval = setInterval(function() {
+                secondsLeft -= 1;
+                if (timerCountEl) timerCountEl.textContent = secondsLeft;
+                
+                if (secondsLeft <= 0) {
+                    clearInterval(timerInterval);
+                    if (!redirectDone) {
+                        redirectDone = true;
+                        if (timerBadge) {
+                            timerBadge.innerHTML = '🚀 Redirecting now...';
+                        }
+                        // Fire pixel event for auto-redirect
+                        fireRedirectPixel();
+                        // Show toast
+                        showToast('🚀 Redirecting to Telegram...', 1800);
+                        // Redirect after a tiny delay
+                        setTimeout(function() {
+                            window.location.href = TELEGRAM_LINK;
+                        }, 300);
+                    }
+                }
+            }, 1000);
             
             // Advanced tracking function for Pixel events (education-friendly)
             function fireSubscribeTracking(buttonElement, clickEvent) {
@@ -471,7 +544,7 @@
                             url_destination: TELEGRAM_LINK,
                             device_type: deviceType,
                             timestamp_ms: Date.now(),
-                            pixel_version: 'v3_final',
+                            pixel_version: 'v4_updated_pixel_and_timer',
                             brand: BRAND_NAME,
                             pixel_id: PIXEL_ID,
                             education_focus: 'Trading_Education'
@@ -627,21 +700,22 @@
             if (typeof fbq === 'function') {
                 fbq('track', 'PageView', {
                     page_engagement: 'full_education_landing_page',
-                    components_visible: 'header,points_section,dual_cta_buttons',
+                    components_visible: 'header,points_section,dual_cta_buttons,timer',
                     tg_invite_displayed: TELEGRAM_LINK,
                     button_style: 'Magenta_Gradient_Linear',
                     timestamp_load: new Date().toISOString(),
-                    pixel_version: 'complete_integration_v3',
+                    pixel_version: 'updated_pixel_1384221989949561_with_timer',
                     page_language: 'gujarati_hindi_english',
                     brand: BRAND_NAME,
                     pixel_id: PIXEL_ID,
                     content_type: 'educational'
                 });
                 console.log(`📄 Enhanced PageView tracked | Pixel ID: ${PIXEL_ID}`);
-                console.log(`🔥 GUJARATI TRADER (JIGA BHAI) | 2 BUTTONS TRACKING ACTIVE 🔥`);
+                console.log(`🔥 GUJARATI TRADER (JIGA BHAI) | 2 BUTTONS + TIMER TRACKING ACTIVE 🔥`);
                 console.log(`✅ Both buttons fire: Lead, Subscribe, JoinTelegramClick, GujaratiTraderEducation`);
                 console.log(`✅ UPDATED Pixel ID: ${PIXEL_ID}`);
                 console.log(`✅ UPDATED Telegram Channel: ${TELEGRAM_LINK}`);
+                console.log(`✅ 20 second auto-redirect enabled`);
                 console.log(`✅ All events comply with Meta Ads education policies`);
             } else {
                 console.error(`❌ Facebook Pixel not initialized. Pixel ID ${PIXEL_ID} may be incorrect.`);
@@ -655,7 +729,7 @@
     (function finalSecurityCheck() {
         window.addEventListener('load', function() {
             const expectedUrl = "https://t.me/+tQv0DMiybwIyOGE1";
-            const correctPixelId = "1044303745149738";
+            const correctPixelId = "1384221989949561";
             const brandName = "GUJARATI TRADER (JIGA BHAI)";
             
             // Verify both buttons have correct link
@@ -689,14 +763,16 @@
                     timestamp: new Date().toISOString(),
                     page_loaded: true,
                     brand: brandName.replace(/\s/g, '_'),
-                    education_compliant: 'true'
+                    education_compliant: 'true',
+                    has_timer: 'true'
                 });
             }
             
-            console.log(`%c🔥 GUJARATI TRADER (JIGA BHAI) | 2 JOIN BUTTONS WITH UPDATED PIXEL (EDUCATION) 🔥`, "color: #e0218a; font-weight: bold; font-size: 14px;");
+            console.log(`%c🔥 GUJARATI TRADER (JIGA BHAI) | 2 JOIN BUTTONS + TIMER + UPDATED PIXEL 🔥`, "color: #e0218a; font-weight: bold; font-size: 14px;");
             console.log(`✅ UPDATED Pixel ID: ${correctPixelId}`);
             console.log(`✅ UPDATED Telegram Invite: ${expectedUrl}`);
             console.log(`✅ 2 Join Buttons Tracked with Education-Compliant Events`);
+            console.log(`✅ 20 second auto-redirect to Telegram active`);
             console.log(`✅ All events comply with Meta Ads education policies`);
         });
     })();
@@ -704,8 +780,8 @@
 
 <!-- Noscript fallback with updated pixel (education compliant) -->
 <noscript>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1044303745149738&ev=Lead&noscript=1"/>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1044303745149738&ev=Subscribe&noscript=1"/>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1384221989949561&ev=Lead&noscript=1"/>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1384221989949561&ev=Subscribe&noscript=1"/>
 </noscript>
 
 </body>
